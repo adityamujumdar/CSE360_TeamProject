@@ -12,7 +12,7 @@ public class FileProcessor
 	{
 		//Change file paths to wherever your input/output files are.
 		File inF = new File("C:\\Users\\pbcin\\eclipse-workspace\\Input.txt");
-		File outF = new java.io.File("C:\\Users\\pbcin\\eclipse-workspace\\Output.txt");
+		File outF = new File("C:\\Users\\pbcin\\eclipse-workspace\\Output.txt");
 		
 		Scanner in = new Scanner(inF);
 		PrintStream ps = new PrintStream(outF);
@@ -83,6 +83,8 @@ public class FileProcessor
 			ps.println(newLine);
 			ps.flush();
 		}
+		
+		System.out.println("\nText being pushed to the modifier methods: " + textBetweenFlags + "\n");
 		
 		//Close files
 		in.close();

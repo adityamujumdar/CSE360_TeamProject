@@ -1,7 +1,5 @@
 package teamProject;
 
-import com.sun.javafx.geom.AreaOp.IntOp;
-
 public class TextProcessor
 {
 	private int justification;
@@ -15,6 +13,26 @@ public class TextProcessor
 		spacing = 0;		//Single space
 		indentation = 0;	//No indent
 		columns = 0;		//1 column
+	}
+	
+	public void setJustification(int just)
+	{
+		justification = just;
+	}
+	
+	public void setSpacing(int space)
+	{
+		spacing = space;
+	}
+	
+	public void setIndentation(int indent)
+	{
+		indentation = indent;
+	}
+	
+	public void setColumns(int col)
+	{
+		columns = col;
 	}
 	
 	public String handleText()

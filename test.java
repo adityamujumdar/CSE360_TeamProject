@@ -24,6 +24,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.awt.FlowLayout;
 
 import javax.swing.UIManager;
@@ -126,16 +130,149 @@ public class test extends JFrame
 	
 	private class handler implements ActionListener
 	{
+		String preview = "";
+		String original = "";
+		String error = "";
+		
 		public void actionPerformed(ActionEvent event)
 		{
 			if(event.getSource() == btnNewButton)
 			{
-				//For testing purposes. Once you can get the file input I would use a getline or something.
-				textPane.setText("Corn.");
-				textPane_1.setText("Corn.");
-				
-				//Open file explorer
-				//It would be here that we would implement the flags.
+				int justification = 0;
+				int spacing = 0;
+				int indentation = 0;
+				int columns = 0;
+				BufferedReader reader;
+				try 
+				{
+					reader = new BufferedReader(new FileReader(""));
+					String line;
+					while((line = reader.readLine()) != null)
+					{
+						original += line;
+						if(line.contains("-"))
+						{
+							if(line.contains("-r"))
+							{
+								justification = 1;
+							}
+							else if(line.contains("-c"))
+							{
+								justification = 2;
+							}
+							else if(line.contains("-l"))
+							{
+								justification = 3;
+							}
+							else if(line.contains("-t"))
+							{
+								justification = 4;
+							}
+							else if(line.contains("-d"))
+							{
+								spacing = 1;
+							}
+							else if(line.contains("-s"))
+							{
+								spacing = 2;
+							}
+							else if(line.contains("-i"))
+							{
+								indentation = 1;
+							}
+							else if(line.contains("-b"))
+							{
+								indentation = 2;
+							}
+							else if(line.contains("-n"))
+							{
+								indentation = 3;
+							}
+							else if(line.contains("-2"))
+							{
+								columns = 1;
+							}
+							else if(line.contains("-1"))
+							{
+								columns = 2;
+							}
+							else if(line.contains("-e"))
+							{
+								//Original += 80 spaces
+							}
+							else
+							{
+								//Error
+							}
+						}
+						else
+						{
+							preview += line;
+						}
+					}
+					if(justification == 1)
+					{
+						
+					}
+					else if(justification == 2)
+					{
+						
+					}
+					else if(justification == 3)
+					{
+						
+					}
+					else if(justification == 4)
+					{
+						
+					}
+					if(spacing == 1)
+					{
+						
+					}
+					else if(spacing == 2)
+					{
+						
+					}
+					if(indentation == 1)
+					{
+						
+					}
+					else if(indentation == 2)
+					{
+						
+					}
+					else if(indentation == 3)
+					{
+						
+					}
+					if(columns == 1)
+					{
+						if(indentation != 0)
+						{
+							
+						}
+						else
+						{
+							
+						}
+					}
+					else if(columns == 2)
+					{
+						if(indentation != 0)
+						{
+							
+						}
+						else
+						{
+							
+						}
+					}
+				} 
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
 			}
 			if(event.getSource() == btnSaveFile)
 			{
@@ -145,11 +282,11 @@ public class test extends JFrame
 			{
 				if(rdbtnNewRadioButton.isSelected())
 				{
-					textPane.setText("Carrot.");
+					textPane.setText(error);
 				}
 				else
 				{
-					textPane.setText("");
+					textPane.setText(original);
 				}
 			}
 		}

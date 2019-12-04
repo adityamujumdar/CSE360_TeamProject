@@ -160,13 +160,13 @@ public class test extends JFrame
 			{
 				if(rdbtnNewRadioButton.isSelected())
 				{
-					lblUploadedFile.setText("Error Log");
-					textPane.setText(error);
+					lblNewLabel_1.setText("Error Log");
+					textPane_1.setText(error);
 				}
 				else
 				{
-					lblUploadedFile.setText("Uploaded File");
-					textPane.setText(original);
+					lblNewLabel_1.setText("Preview");
+					textPane_1.setText(original);
 				}
 			}
 		}

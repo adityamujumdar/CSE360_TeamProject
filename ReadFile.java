@@ -1,4 +1,4 @@
-package test;
+package teamProject;
 
 import java.awt.EventQueue;
 import java.util.Scanner;

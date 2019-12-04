@@ -166,7 +166,7 @@ public class test extends JFrame
 				else
 				{
 					lblNewLabel_1.setText("Preview");
-					textPane_1.setText(original);
+					textPane_1.setText(preview);
 				}
 			}
 		}

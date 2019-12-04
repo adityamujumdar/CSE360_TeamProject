@@ -1,0 +1,38 @@
+3 parts -> 2 team, 1 individual
+
+Report will contain what the team did, what the team could have done better, etc.
+
+Requirements:
+-------------------------------------------------
+GUI 	-load file (processing)
+	-save as
+	-error log
+	-preview
+
+Taking in text files -> |processing| -> formatted files
+
+We are writing the processing.
+
+defaults:	80 chars/line		single space
+		left justified
+		merge input lines up to & including 80 chars
+
+flags (on own line, at beginning of line):
+-r		right justification
+-c		center justification (right & left)
+-l		left justified
+-t		centered, no justification (Title)
+
+-d		double space
+-s 		single space
+
+-i		indent on 1st line, 5 spaces, left only
+-b		indent multiple lines, 10 spaces
+-n		no indent
+
+-2		2 columns, 35 chrs / 10 chrs / 35 chrs (columns can have justification, but cannot be indented) 
+-1		1 column
+
+-e		blank line
+
+preview will show what the output file is going to look like when saved

@@ -136,143 +136,21 @@ public class test extends JFrame
 		
 		public void actionPerformed(ActionEvent event)
 		{
+			
 			if(event.getSource() == btnNewButton)
 			{
-				int justification = 0;
-				int spacing = 0;
-				int indentation = 0;
-				int columns = 0;
-				BufferedReader reader;
-				try 
+				ReadFile of = new ReadFile();
+				
+				try
 				{
-					reader = new BufferedReader(new FileReader(""));
-					String line;
-					while((line = reader.readLine()) != null)
-					{
-						original += line;
-						if(line.contains("-"))
-						{
-							if(line.contains("-r"))
-							{
-								justification = 1;
-							}
-							else if(line.contains("-c"))
-							{
-								justification = 2;
-							}
-							else if(line.contains("-l"))
-							{
-								justification = 3;
-							}
-							else if(line.contains("-t"))
-							{
-								justification = 4;
-							}
-							else if(line.contains("-d"))
-							{
-								spacing = 1;
-							}
-							else if(line.contains("-s"))
-							{
-								spacing = 2;
-							}
-							else if(line.contains("-i"))
-							{
-								indentation = 1;
-							}
-							else if(line.contains("-b"))
-							{
-								indentation = 2;
-							}
-							else if(line.contains("-n"))
-							{
-								indentation = 3;
-							}
-							else if(line.contains("-2"))
-							{
-								columns = 1;
-							}
-							else if(line.contains("-1"))
-							{
-								columns = 2;
-							}
-							else if(line.contains("-e"))
-							{
-								//Original += 80 spaces
-							}
-							else
-							{
-								//Error
-							}
-						}
-						else
-						{
-							preview += line;
-						}
-					}
-					if(justification == 1)
-					{
-						
-					}
-					else if(justification == 2)
-					{
-						
-					}
-					else if(justification == 3)
-					{
-						
-					}
-					else if(justification == 4)
-					{
-						
-					}
-					if(spacing == 1)
-					{
-						
-					}
-					else if(spacing == 2)
-					{
-						
-					}
-					if(indentation == 1)
-					{
-						
-					}
-					else if(indentation == 2)
-					{
-						
-					}
-					else if(indentation == 3)
-					{
-						
-					}
-					if(columns == 1)
-					{
-						if(indentation != 0)
-						{
-							
-						}
-						else
-						{
-							
-						}
-					}
-					else if(columns == 2)
-					{
-						if(indentation != 0)
-						{
-							
-						}
-						else
-						{
-							
-						}
-					}
-				} 
-				catch (IOException e) 
+					of.select();
+				}
+				catch(Exception e)
 				{
 					e.printStackTrace();
 				}
+				textPane.setText(of.builder.toString());
+				original = of.builder.toString();
 			}
 			if(event.getSource() == btnSaveFile)
 			{
@@ -282,10 +160,12 @@ public class test extends JFrame
 			{
 				if(rdbtnNewRadioButton.isSelected())
 				{
+					lblUploadedFile.setText("Error Log");
 					textPane.setText(error);
 				}
 				else
 				{
+					lblUploadedFile.setText("Uploaded File");
 					textPane.setText(original);
 				}
 			}

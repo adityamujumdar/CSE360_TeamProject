@@ -16,12 +16,12 @@ public class FileProcessor
 		
 		Scanner in = new Scanner(inF);
 		PrintStream ps = new PrintStream(outF);
-		
+		protected int currentCharNum = 0;
 		//While the input file has a next line, retrieve that line,
 		//print it, and write it to the new file.
-		
-		int charCountBetweenFlags = 0;
-		String textBetweenFlags = "";
+		ArrayList<String> errorTracker = new ArrayList<String>();
+		protected int charCountBetweenFlags = 0;
+		protected String textBetweenFlags = "";
 		
 		while(in.hasNextLine())
 		{
@@ -62,9 +62,12 @@ public class FileProcessor
 							
 						case 'e': /*call blank line method*/; break;
 						
-						default: /*call error log with bad flag error*/; break;
+							/*call error log with bad flag error*/
+						default: 
+							/*currentCharNum describes where we are inside the given text file.*/
+							errorTracker.add("Error! Incorred Flag entered at line" + (1+currentCharNum) +"."); break;
 					}
-					
+					currentCharNum += 1;
 					//Reset the two trackers of the text in between the flags.
 					charCountBetweenFlags = 0;
 					textBetweenFlags = "";

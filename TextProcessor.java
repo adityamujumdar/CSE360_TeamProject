@@ -7,6 +7,7 @@ public class TextProcessor
 	private int indentation;
 	private int columns;
 	
+	//default conditions
 	public Explorer()
 	{
 		justification = 0; 	//Left justified

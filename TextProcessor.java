@@ -7,7 +7,7 @@ public class TextProcessor
 	private int indentation;
 	private int columns;
 	
-	public TextProcessor()
+	public Explorer()
 	{
 		justification = 0; 	//Left justified
 		spacing = 0;		//Single space
@@ -15,29 +15,28 @@ public class TextProcessor
 		columns = 0;		//1 column
 	}
 	
-	public void setJustification(int just)
+	public void setJustification(int justification)
 	{
-		justification = just;
+		this.justification = justification;
 	}
 	
-	public void setSpacing(int space)
+	public void setSpacing(int spacing)
 	{
-		spacing = space;
+		this.spacing = spacing;
 	}
 	
-	public void setIndentation(int indent)
+	public void setIndentation(int indentation)
 	{
-		indentation = indent;
+		this.indentation = indentation;
 	}
 	
-	public void setColumns(int col)
+	public void setColumns(int columns)
 	{
-		columns = col;
+		this.columns = columns;
 	}
 	
 	public String handleText()
 	{
-		
 		return null;
 	}
 	

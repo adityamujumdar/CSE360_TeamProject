@@ -36,6 +36,16 @@ public class TextProcessor
 		this.columns = columns;
 	}
 	
+	public int getIndentation()
+	{
+		return indentation;
+	}
+	
+	public int getColumns()
+	{
+		return columns;
+	}
+	
 	public String handleText(String inputLine)
 	{
 		return inputLine;

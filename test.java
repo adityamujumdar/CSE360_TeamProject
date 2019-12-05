@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.awt.FlowLayout;
@@ -139,32 +140,32 @@ public class test extends JFrame
 		String preview = "";
 		String original = "";
 		String error = "";
+		File output;
 		
 		public void actionPerformed(ActionEvent event)
 		{
-			
 			if(event.getSource() == btnNewButton)
 			{
-				ReadFile of = new ReadFile();
+				ReadFile ofInput = new ReadFile();
 				FileProcessor fp = new FileProcessor();
 				
 				try
 				{
-					of.select();
+					ofInput.select();
 				}
 				catch(Exception e)
 				{
 					e.printStackTrace();
 				}
-				textPane.setText(of.builder.toString());
-				original = of.builder.toString();
+				textPane.setText(ofInput.builder.toString());
+				original = ofInput.builder.toString();
 				
 				try
 				{
-					File input = of.getCurrentSourceFile();
-					File output = fp.handleFile(input);
-					
+					File input = ofInput.getCurrentSourceFile();
+					output = fp.handleFile(input);
 					error = (fp.getErrorString()).toString();
+					
 					if(error.compareTo("") != 0)
 					{
 						preview = "There are errors within the text file. Please select the Error log" +
@@ -182,7 +183,7 @@ public class test extends JFrame
 					
 					textPane_1.setText(preview);
 				}
-				catch (FileNotFoundException e)
+				catch (IOException e)
 				{
 					e.printStackTrace();
 				}
@@ -190,7 +191,40 @@ public class test extends JFrame
 			
 			if(event.getSource() == btnSaveFile)
 			{
-				//Create new text file.
+				Scanner transfer = null;
+				try
+				{
+					transfer = new Scanner(output);
+				}
+				catch (FileNotFoundException e1)
+				{
+					e1.printStackTrace();
+				}
+				
+				ReadFile ofOutput = new ReadFile();
+				File saveFilepath;
+				PrintStream ps = null;
+				
+				try
+				{
+					ofOutput.select();
+					saveFilepath = ofOutput.getCurrentSourceFile();
+					ps = new PrintStream(saveFilepath);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				
+				while (transfer.hasNextLine())
+				{
+					String nextLine = transfer.nextLine();
+					ps.println(nextLine);
+					ps.flush();
+				}
+				
+				transfer.close();
+				ps.close();
 			}
 			
 			if(event.getSource() == rdbtnNewRadioButton)

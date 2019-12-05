@@ -1,11 +1,14 @@
 package teamProject;
 
 import java.io.PrintStream;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class FileProcessor
 {	
@@ -13,13 +16,15 @@ public class FileProcessor
 	private ArrayList<Integer> errorLines;
 	private StringBuilder errorString;
 	
-	public File handleFile(File input) throws FileNotFoundException
+	public File handleFile(File input) throws IOException
 	{
 		//Change file paths to wherever your output file should go.
-		File outF = new File("C:\\Users\\pbcin\\Documents\\Output.txt");
+		File outF = new File("Test.txt");
 		
 		Scanner in = new Scanner(input);
-		PrintStream ps = new PrintStream(outF);
+		FileWriter outWrite = new FileWriter(outF); 
+		BufferedWriter out = new BufferedWriter(outWrite);
+		
 		int currentLineNum = 1;
 		TextProcessor tp = new TextProcessor();
 		
@@ -137,8 +142,7 @@ public class FileProcessor
 				System.out.println(" " + charCountBetweenFlags);
 			}
 			
-			ps.println(newLine);
-			ps.flush();
+			out.write(newLine + "\n");
 			
 			//Advance the line counter
 			currentLineNum++;
@@ -150,7 +154,7 @@ public class FileProcessor
 		
 		//Close files
 		in.close();
-		ps.close();
+		out.close();
 		
 		return outF;
 	}

@@ -19,6 +19,8 @@ import java.awt.Insets;
 import java.awt.ComponentOrientation;
 import java.awt.Panel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,16 +96,17 @@ public class test extends JFrame
 		textPane = new JTextPane();
 		textPane.setName("Uploaded Text Document");
 		textPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textPane.setBounds(10, 125, 750, 471);
-		contentPane.add(textPane);
+		JScrollPane scrollPane1 = new JScrollPane(textPane);
+		scrollPane1.setBounds(10, 125, 750, 471);
+		contentPane.add(scrollPane1);
 		
 		textPane_1 = new JTextPane();
-		textPane_1.setToolTipText("Hi");
 		textPane_1.setName("Preview Formatted File");
 		textPane_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textPane_1.setForeground(new Color(0, 0, 0));
-		textPane_1.setBounds(770, 125, 719, 471);
-		contentPane.add(textPane_1);
+		JScrollPane scrollPane2 = new JScrollPane(textPane_1);
+		scrollPane2.setBounds(770, 125, 719, 471);
+		contentPane.add(scrollPane2);
 		
 		lblUploadedFile = new JLabel("Uploaded File");
 		lblUploadedFile.setHorizontalAlignment(SwingConstants.CENTER);
@@ -144,6 +147,8 @@ public class test extends JFrame
 			{
 				ReadFile of = new ReadFile();
 				FileProcessor fp = new FileProcessor();
+				ErrorHandler errorH = new ErrorHandler();
+				
 				try
 				{
 					of.select();
@@ -172,6 +177,10 @@ public class test extends JFrame
 				{
 					e.printStackTrace();
 				}
+				
+				error = errorH.errorString.toString();
+				if(error.compareTo("") != 0)
+					preview = "There are errors within the text file. Please selected the Error log to view them.";
 			}
 			
 			if(event.getSource() == btnSaveFile)

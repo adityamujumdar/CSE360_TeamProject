@@ -10,23 +10,40 @@
                       HATTIE GORDON SMITH
                  in grateful remembrance of her
                     sympathy and encouragement
-
-
+-i-w
+//error 1
 
             Flowers spring to blossom where she walks
                     The careful ways of duty,
               Our hard, stiff lines of life with her
                   Are flowing curves of beauty.
                                                -WHITTIER
-
-
+-z
+//error 2
+-2
+//NOT error 3 because no indentation yet
 
 I         An Irate Neighbor
 II        Selling in Haste and Repenting at Leisure
+
+-i
+//error 3
+
 III       Mr. Harrison at Home
 IV        Different Opinions47
+
+-1
+//reset
+
+-i
+//NOT error 3 because no columns
+
 V         A Full-fledged Schoolma'am
 VI        All Sorts and Conditions of Men. . .and women
+
+-2
+//error 3
+
 VII       The Pointing of Duty
 VIII      Marilla Adopts Twins
 IX        A Question of Color

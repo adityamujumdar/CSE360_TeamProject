@@ -147,7 +147,6 @@ public class test extends JFrame
 			{
 				ReadFile of = new ReadFile();
 				FileProcessor fp = new FileProcessor();
-				ErrorHandler errorH = new ErrorHandler();
 				
 				try
 				{
@@ -164,11 +163,21 @@ public class test extends JFrame
 				{
 					File input = of.getCurrentSourceFile();
 					File output = fp.handleFile(input);
-					Scanner readOutput = new Scanner(output);
 					
-					while (readOutput.hasNextLine())
+					error = (fp.getErrorString()).toString();
+					if(error.compareTo("") != 0)
 					{
-						preview += (readOutput.nextLine() + "\n");
+						preview = "There are errors within the text file. Please select the Error log" +
+								" to view them and then reupload a file with no errors.";
+					}
+					
+					else
+					{
+						Scanner readOutput = new Scanner(output);
+						while (readOutput.hasNextLine())
+						{
+							preview += (readOutput.nextLine() + "\n");
+						}
 					}
 					
 					textPane_1.setText(preview);
@@ -177,10 +186,6 @@ public class test extends JFrame
 				{
 					e.printStackTrace();
 				}
-				
-				error = errorH.errorString.toString();
-				if(error.compareTo("") != 0)
-					preview = "There are errors within the text file. Please selected the Error log to view them.";
 			}
 			
 			if(event.getSource() == btnSaveFile)

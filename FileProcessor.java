@@ -11,6 +11,7 @@ public class FileProcessor
 {	
 	private ArrayList<Integer> errorTracker;
 	private ArrayList<Integer> errorLines;
+	private StringBuilder errorString;
 	
 	public File handleFile(File input) throws FileNotFoundException
 	{
@@ -22,7 +23,6 @@ public class FileProcessor
 		int currentLineNum = 1;
 		TextProcessor tp = new TextProcessor();
 		
-		ErrorHandler errors = new ErrorHandler();
 		errorTracker = new ArrayList<Integer>();
 		errorLines = new ArrayList<Integer>();
 		
@@ -35,9 +35,6 @@ public class FileProcessor
 		{
 			String newLine = in.nextLine();
 			
-			
-			System.out.print(newLine);
-			
 			char flag = 0;
 			
 			//If the new line is a flag
@@ -45,9 +42,6 @@ public class FileProcessor
 			{
 				if(newLine.length() == 2)
 				{
-					System.out.println("");
-					
-					System.out.println("\nText being pushed to the modifier methods: " + textBetweenFlags + "\n");
 					tp.handleText(textBetweenFlags);
 					
 					flag = newLine.charAt(1);
@@ -116,7 +110,9 @@ public class FileProcessor
 							errorLines.add(currentLineNum); break;
 					}
 					
-					
+					//Reset the two trackers of the text in between the flags.
+					charCountBetweenFlags = 0;
+					textBetweenFlags = "";
 				}
 				
 				else
@@ -128,12 +124,6 @@ public class FileProcessor
 						errorLines.add(currentLineNum);
 					}
 				}
-				
-				//Advance the line counter
-				currentLineNum++;
-				//Reset the two trackers of the text in between the flags.
-				charCountBetweenFlags = 0;
-				textBetweenFlags = "";
 			}
 			
 			//If the new line is text to be modified
@@ -142,14 +132,21 @@ public class FileProcessor
 				charCountBetweenFlags += newLine.length();
 				textBetweenFlags = textBetweenFlags + newLine + " ";
 				
+				//Prints out how many characters are between the end of the current line and the previous flag
+				//FOR DEBUGGING ONLY
 				System.out.println(" " + charCountBetweenFlags);
 			}
 			
 			ps.println(newLine);
 			ps.flush();
+			
+			//Advance the line counter
+			currentLineNum++;
 		}
 		
-		System.out.println("\nText being pushed to the modifier methods: " + textBetweenFlags + "\n");
+		//Handle error retrieval
+		ErrorHandler errors = new ErrorHandler(errorTracker, errorLines);
+		errorString = errors.processErrors();
 		
 		//Close files
 		in.close();
@@ -158,19 +155,8 @@ public class FileProcessor
 		return outF;
 	}
 	
-	public ArrayList<Integer> getErrors()
+	public StringBuilder getErrorString()
 	{
-		return errorTracker;
-	}
-	
-	public ArrayList<Integer> getErrorLines()
-	{
-		return errorLines;
-	}
-	
-	public String printErrors()
-	{
-		//String of all errors produced by ErrorLog class
-		return null;
+		return errorString;
 	}
 }

@@ -8,7 +8,7 @@ public class TextProcessor
 	private int columns;
 	
 	//default conditions
-	public Explorer()
+	public TextProcessor()
 	{
 		justification = 0; 	//Left justified
 		spacing = 0;		//Single space
@@ -36,9 +36,9 @@ public class TextProcessor
 		this.columns = columns;
 	}
 	
-	public String handleText()
+	public String handleText(String inputLine)
 	{
-		return null;
+		return inputLine;
 	}
 	
 }

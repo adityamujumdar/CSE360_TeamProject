@@ -1,4 +1,4 @@
-package test;
+package teamProject;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -25,9 +25,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.FileHandler;
 import java.awt.FlowLayout;
 
 import javax.swing.UIManager;
@@ -140,7 +143,7 @@ public class test extends JFrame
 			if(event.getSource() == btnNewButton)
 			{
 				ReadFile of = new ReadFile();
-				
+				FileProcessor fp = new FileProcessor();
 				try
 				{
 					of.select();
@@ -151,11 +154,31 @@ public class test extends JFrame
 				}
 				textPane.setText(of.builder.toString());
 				original = of.builder.toString();
+				
+				try
+				{
+					File input = of.getCurrentSourceFile();
+					File output = fp.handleFile(input);
+					Scanner readOutput = new Scanner(output);
+					
+					while (readOutput.hasNextLine())
+					{
+						preview += (readOutput.nextLine() + "\n");
+					}
+					
+					textPane_1.setText(preview);
+				}
+				catch (FileNotFoundException e)
+				{
+					e.printStackTrace();
+				}
 			}
+			
 			if(event.getSource() == btnSaveFile)
 			{
 				//Create new text file.
 			}
+			
 			if(event.getSource() == rdbtnNewRadioButton)
 			{
 				if(rdbtnNewRadioButton.isSelected())

@@ -1,6 +1,7 @@
 package teamProject;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.io.File;
@@ -8,21 +9,22 @@ import java.io.FileNotFoundException;
 
 public class FileProcessor
 {
-	public static void main(String[] args) throws FileNotFoundException
+	public File handleFile(File input) throws FileNotFoundException
 	{
-		//Change file paths to wherever your input/output files are.
-		File inF = new File("C:\\Users\\pbcin\\eclipse-workspace\\Input.txt");
-		File outF = new File("C:\\Users\\pbcin\\eclipse-workspace\\Output.txt");
+		//Change file paths to wherever your output file should go.
+		File outF = new File("C:\\Users\\pbcin\\Documents\\Output.txt");
 		
-		Scanner in = new Scanner(inF);
+		Scanner in = new Scanner(input);
 		PrintStream ps = new PrintStream(outF);
-		protected int currentCharNum = 0;
+		int currentLineNum = 1;
+		TextProcessor tp = new TextProcessor();
+		
+		ArrayList<String> errorTracker = new ArrayList<String>();
+		int charCountBetweenFlags = 0;
+		String textBetweenFlags = "";
+		
 		//While the input file has a next line, retrieve that line,
 		//print it, and write it to the new file.
-		ArrayList<String> errorTracker = new ArrayList<String>();
-		protected int charCountBetweenFlags = 0;
-		protected String textBetweenFlags = "";
-		
 		while(in.hasNextLine())
 		{
 			String newLine = in.nextLine();
@@ -40,34 +42,35 @@ public class FileProcessor
 					System.out.println("");
 					
 					System.out.println("\nText being pushed to the modifier methods: " + textBetweenFlags + "\n");
+					tp.handleText(textBetweenFlags);
 					
 					flag = newLine.charAt(1);
 
 					switch(flag)
 					{
-						case 'r': /*call r justif. method*/; break;
-						case 'c': /*call c justif. method*/; break;
-						case 'l': /*call l justif. method*/; break;
-						case 't': /*call t justif. method*/; break;
+						case 'l': tp.setJustification(0); break;
+						case 'r': tp.setJustification(1); break;
+						case 't': tp.setJustification(2); break;
+						case 'c': tp.setJustification(3); break;
 						
-						case 'd': /*call double space method*/; break;
-						case 's': /*call double space method*/; break;
+						case 's': tp.setSpacing(0); break;
+						case 'd': tp.setSpacing(1); break;
 						
-						case 'i': /*call normal indent method*/; break;
-						case 'b': /*call block indent method*/; break;
-						case 'n': /*call no indent method*/; break;
-							
-						case '2': /*call two columns method*/; break;
-						case '1': /*call one columns method*/; break;
+						case 'n': tp.setIndentation(0); break;
+						case 'i': tp.setIndentation(1); break;
+						case 'b': tp.setIndentation(2); break;
+						
+						case '1': tp.setColumns(0); break;
+						case '2': tp.setColumns(1); break;
 							
 						case 'e': /*call blank line method*/; break;
 						
 							/*call error log with bad flag error*/
 						default: 
-							/*currentCharNum describes where we are inside the given text file.*/
-							errorTracker.add("Error! Incorred Flag entered at line" + (1+currentCharNum) +"."); break;
+							/*currentLineNum describes where we are inside the given text file.*/
+							errorTracker.add("Error! Incorred Flag entered at line" + currentLineNum + "."); break;
 					}
-					currentCharNum += 1;
+					currentLineNum += 1;
 					//Reset the two trackers of the text in between the flags.
 					charCountBetweenFlags = 0;
 					textBetweenFlags = "";
@@ -92,5 +95,7 @@ public class FileProcessor
 		//Close files
 		in.close();
 		ps.close();
+		
+		return outF;
 	}
 }

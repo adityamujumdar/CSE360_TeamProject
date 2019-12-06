@@ -1,12 +1,10 @@
 package teamProject;
 
-import java.io.PrintStream;
-import java.io.Writer;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -47,10 +45,13 @@ public class FileProcessor
 			{
 				if(newLine.length() == 2)
 				{
-					tp.handleText(textBetweenFlags);
-					
 					flag = newLine.charAt(1);
-
+					
+					if(!textBetweenFlags.equals(""))
+					{
+						out.write(tp.handleText(textBetweenFlags) + "\n");
+					}
+					
 					switch(flag)
 					{
 						//Justification flags
@@ -80,7 +81,7 @@ public class FileProcessor
 						case 'b':
 							if(tp.getColumns() == 0)
 							{
-								tp.setIndentation(1);
+								tp.setIndentation(2);
 							}
 							else
 							{
@@ -107,7 +108,6 @@ public class FileProcessor
 						
 						//Blank line
 						case 'e': /*call blank line method*/; break;
-						
 						
 						default:
 							//Add invalid flag error (#2) to error tracking arrays
@@ -139,10 +139,10 @@ public class FileProcessor
 				
 				//Prints out how many characters are between the end of the current line and the previous flag
 				//FOR DEBUGGING ONLY
-				System.out.println(" " + charCountBetweenFlags);
+				//System.out.println(" " + charCountBetweenFlags);
 			}
 			
-			out.write(newLine + "\n");
+			
 			
 			//Advance the line counter
 			currentLineNum++;

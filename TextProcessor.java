@@ -46,21 +46,76 @@ public class TextProcessor
 		return columns;
 	}
 	
-	public String handleText(String inputLine)
+	public String handleText(String inputText)
 	{
-		return inputLine;
+		System.out.println(inputText);
+		String outputText = "";
+		
+		//ONE COLUMN
+		if (columns == 0)
+		{
+			//SINGLE SPACE
+			if(spacing == 0)
+			{
+				//NO INDENT
+				if (indentation == 0)
+				{
+					outputText = justifyString(inputText, 80);
+				}
+				//NORMAL INDENT
+				else if (indentation == 1)
+				{
+					outputText = "     " + justifyString(inputText, 75);
+				}
+				//BLOCK INDENT
+				else
+				{
+					
+				}
+			}
+			//DOUBLE SPACE
+			else
+			{
+				//NO INDENT
+				if (indentation == 0)
+				{
+					
+				}
+				//NORMAL INDENT
+				else if (indentation == 1)
+				{
+					
+				}
+				//BLOCK INDENT
+				else
+				{
+					
+				}
+			}
+		}
+		//TWO COLUMNS
+		else
+		{
+			outputText = twoColumns(inputText);
+		}
+		System.out.println(outputText);
+		return outputText;
 	}
    
-   public String justifyString(String text, int lineLength){      //This method takes a string and a line length(i.e. 80) anf justifies it
+   public String justifyString(String text, int lineLength){      //This method takes a string and a line length(i.e. 80) and justifies it
       
-      for(int i = 0; i< text.length(); i++){
-         if(text.charAt(i) == ' ' && text.length() < lineLength){
-            text = text.substring(0, i) + ' ' + text.substring(i); // adding extra spaces
-            i++;
-         }
-         
-      }
-      
+	  if (text.length() != lineLength){ //recursive call
+	      for(int i = 0; i < text.length(); i++)
+	      {
+	         if(text.charAt(i) == ' ' && text.length() < lineLength)
+	         {
+	            text = text.substring(0, i) + ' ' + text.substring(i); // adding extra spaces
+	            i++;
+	         }
+	         
+	      }
+	  }
+	  
       if (text.length() != lineLength){ //recursive call
          for(int i = 0; i< text.length(); i++){
          if(text.charAt(i) == ' ' && text.length() < lineLength){
@@ -71,7 +126,7 @@ public class TextProcessor
       }      
       }
 	   
-	         if (text.length() != lineLength){ //recursive call
+	  if (text.length() != lineLength){ //recursive call
          for(int i = 0; i< text.length(); i++){
          if(text.charAt(i) == ' ' && text.length() < lineLength){
             text = text.substring(0, i) + ' ' + text.substring(i); // adding extra spaces
@@ -103,7 +158,8 @@ public class TextProcessor
       return text;
       }
       
-      public String twoColumns(String textBlock, int justification){
+   public String twoColumns(String textBlock)
+   {
 
    int mid = textBlock.length() / 2; //get the middle of the String
    
@@ -168,6 +224,5 @@ public class TextProcessor
    
    return columns;
 
-}
-      
+      }     
 }

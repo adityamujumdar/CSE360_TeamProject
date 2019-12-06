@@ -55,7 +55,7 @@ public class TextProcessor
       
       for(int i = 0; i< text.length(); i++){
          if(text.charAt(i) == ' ' && text.length() < lineLength){
-            text = text.substring(0, i) + ' ' + text.substring(i);
+            text = text.substring(0, i) + ' ' + text.substring(i); // adding extra spaces
             i++;
          }
          
@@ -88,36 +88,36 @@ public class TextProcessor
    int charLimit2 = 35;
    String columns = "";
    
-   for(int x = 1; x <= (column1.length() / 35)+1; x++){
+   for(int x = 1; x <= (column1.length() / 35)+1; x++){    //run through string 35 times
    
-   charLimit = 35*x;
+   charLimit = 35*x;		//updating uperlimit
    
-   if (charLimit > column1.length()){
+   if (charLimit > column1.length()){		//running through the string
       while (charLimit > column1.length())
          charLimit--;
          
    
          }
    else
-      while(column1.charAt(charLimit) != ' ')
+      while(column1.charAt(charLimit) != ' ')		//not cutting a word in half
          charLimit--;
          
-   String tmp = column1.substring(count,charLimit);
-   if (tmp.charAt(0) == ' '){
+   String tmp = column1.substring(count,charLimit);	//new column line
+   if (tmp.charAt(0) == ' '){				//removing extra whitespace
       tmp = tmp.substring(0, 0) + tmp.substring(1);
    }
    
    charLimit2 = 35*x;
    
-  if (charLimit2 > column2.length())
+  if (charLimit2 > column2.length())		//running through the string
       while (charLimit2 > column2.length())
          charLimit2--;
    else
-      while(column2.charAt(charLimit2) != ' ')
+      while(column2.charAt(charLimit2) != ' ')		//not cutting a word in half
          charLimit2--;
          
-   String tmp1 = column2.substring(count2,charLimit2);
-   if (tmp1.charAt(0) == ' '){
+   String tmp1 = column2.substring(count2,charLimit2);	//new column line
+   if (tmp1.charAt(0) == ' '){				//removing extra whitespace
       tmp1 = tmp1.substring(0, 0) + tmp1.substring(1);
    }
 
@@ -126,7 +126,7 @@ public class TextProcessor
    else if (justification == 2){columns = columns + justifyString(tmp,35) + "          " + justifyString(tmp1,35) +"\n";}//left
    else if (justification == 3){columns = columns + tmp + "          " + tmp1 + "\n";}                           //title
 
-   count = charLimit;
+   count = charLimit;   //editing the counters
    count2 = charLimit2;
    }   
    

@@ -137,16 +137,16 @@ public class test extends JFrame
 	
 	private class handler implements ActionListener
 	{
-		String preview = "";
+		String preview = "";			//Strings to be added to the text panes.
 		String original = "";
 		String error = "";
 		File output;
 		
 		public void actionPerformed(ActionEvent event)
 		{
-			if(event.getSource() == btnNewButton)
+			if(event.getSource() == btnNewButton)			//If the user presses the upload button.
 			{
-				ReadFile ofInput = new ReadFile();
+				ReadFile ofInput = new ReadFile();			//Have them open file explorer for a text file.
 				FileProcessor fp = new FileProcessor();
 				
 				try
@@ -157,16 +157,16 @@ public class test extends JFrame
 				{
 					e.printStackTrace();
 				}
-				textPane.setText(ofInput.builder.toString());
+				textPane.setText(ofInput.builder.toString());		//Set the selected text file to the text pane and original string.
 				original = ofInput.builder.toString();
 				
 				try
 				{
-					File input = ofInput.getCurrentSourceFile();
+					File input = ofInput.getCurrentSourceFile();	//Process the flags.
 					output = fp.handleFile(input);
-					error = (fp.getErrorString()).toString();
+					error = (fp.getErrorString()).toString();		//From the ErrorHandler class access the string.
 					
-					if(error.compareTo("") != 0)
+					if(error.compareTo("") != 0)					//If there are errors.
 					{
 						preview = "There are errors within the text file. Please select the Error log" +
 								" to view them and then reupload a file with no errors.";
@@ -174,7 +174,7 @@ public class test extends JFrame
 					
 					else
 					{
-						Scanner readOutput = new Scanner(output);
+						Scanner readOutput = new Scanner(output);	//If there are no errors read the lines into the preview.
 						while (readOutput.hasNextLine())
 						{
 							preview += (readOutput.nextLine() + "\n");
@@ -189,7 +189,7 @@ public class test extends JFrame
 				}
 			}
 			
-			if(event.getSource() == btnSaveFile)
+			if(event.getSource() == btnSaveFile)		//If the save file button is selected.
 			{
 				Scanner transfer = null;
 				try
@@ -229,12 +229,12 @@ public class test extends JFrame
 			
 			if(event.getSource() == rdbtnNewRadioButton)
 			{
-				if(rdbtnNewRadioButton.isSelected())
+				if(rdbtnNewRadioButton.isSelected())	//If the radio button is selected then set to the error log.
 				{
 					lblNewLabel_1.setText("Error Log");
 					textPane_1.setText(error);
 				}
-				else
+				else									//Else if it is deselected set to preview.
 				{
 					lblNewLabel_1.setText("Preview");
 					textPane_1.setText(preview);

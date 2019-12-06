@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -225,6 +227,8 @@ public class test extends JFrame
 				
 				transfer.close();
 				ps.close();
+				
+				JOptionPane.showMessageDialog(null, "Saved.");
 			}
 			
 			if(event.getSource() == rdbtnNewRadioButton)

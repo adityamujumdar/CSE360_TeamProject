@@ -98,14 +98,14 @@ public class test extends JFrame
 		
 		textPane = new JTextPane();
 		textPane.setName("Uploaded Text Document");
-		textPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textPane.setFont(new Font("Courier New", Font.PLAIN, 14));
 		JScrollPane scrollPane1 = new JScrollPane(textPane);
 		scrollPane1.setBounds(10, 125, 750, 471);
 		contentPane.add(scrollPane1);
 		
 		textPane_1 = new JTextPane();
 		textPane_1.setName("Preview Formatted File");
-		textPane_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textPane_1.setFont(new Font("Courier New", Font.PLAIN, 14));
 		textPane_1.setForeground(new Color(0, 0, 0));
 		JScrollPane scrollPane2 = new JScrollPane(textPane_1);
 		scrollPane2.setBounds(770, 125, 719, 471);
@@ -227,6 +227,8 @@ public class test extends JFrame
 				
 				transfer.close();
 				ps.close();
+				
+				textPane_1.setText("");
 				
 				JOptionPane.showMessageDialog(null, "Saved.");
 			}

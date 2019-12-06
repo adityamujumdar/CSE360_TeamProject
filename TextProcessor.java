@@ -61,9 +61,45 @@ public class TextProcessor
          
       }
       
-      if (text.length() != lineLength) //recursive call
-         justifyString(text,lineLength);
-      
+      if (text.length() != lineLength){ //recursive call
+         for(int i = 0; i< text.length(); i++){
+         if(text.charAt(i) == ' ' && text.length() < lineLength){
+            text = text.substring(0, i) + ' ' + text.substring(i); // adding extra spaces
+            i++;
+         }
+         
+      }      
+      }
+	   
+	         if (text.length() != lineLength){ //recursive call
+         for(int i = 0; i< text.length(); i++){
+         if(text.charAt(i) == ' ' && text.length() < lineLength){
+            text = text.substring(0, i) + ' ' + text.substring(i); // adding extra spaces
+            i++;
+         }
+         
+      }      
+      }
+	   
+	      if (text.length() != lineLength){ //recursive call
+         for(int i = 0; i< text.length(); i++){
+         if(text.charAt(i) == ' ' && text.length() < lineLength){
+            text = text.substring(0, i) + ' ' + text.substring(i); // adding extra spaces
+            i++;
+         }
+         
+      }      
+      }
+	         if (text.length() != lineLength){ //recursive call
+         for(int i = 0; i< text.length(); i++){
+         if(text.charAt(i) == ' ' && text.length() < lineLength){
+            text = text.substring(0, i) + ' ' + text.substring(i); // adding extra spaces
+            i++;
+         }
+         
+      }      
+      }
+	   
       return text;
       }
       
